@@ -1,0 +1,74 @@
+<html>
+<head></head>
+<body id="body"><body>
+<script>
+
+var fita = [0,1,0,0,1,0,1,1,1,0,0,-1];
+console.log(fita);
+var estado = "A";
+var cabecote = 0;
+var text = "";
+function turing(fita, estado, cabecote){
+	
+	
+	text += "<br><b>ESTADO</b>: "+estado+" <b>CABECOTE EM</b>: "+cabecote+"<br>";
+	text += "<div><b>FITA</b>: "+fita.toString()+"<div>";
+	
+	
+	if(estado == "A"){
+		cabecote++;
+		estado = "B";
+	}else if(estado == "B"){
+		cabecote--;
+		estado = "C";
+	}else if(estado == "C"){
+		
+		
+		if(fita[cabecote] == 0)
+			estado = "D"
+		else if( fita[cabecote] == 1)
+			estado = "E";
+		
+		cabecote++;
+	}else if(estado == "D"){
+		cabecote++;
+		estado = "F"
+		
+	}else if(estado == "E"){
+		cabecote++;
+		estado = "G";
+		
+	}else if(estado == "F"){
+		cabecote--;
+		
+		if(fita[cabecote] == 0)
+			fita[cabecote] = 0;
+		else if(fita[cabecote] == 1)
+		   fita[cabecote] = 1;
+		   
+		estado = "A";
+	}else if(estado == "G"){
+		cabecote--;
+		
+		if(fita[cabecote] == 0)
+			fita[cabecote] = 1;
+		else if(fita[cabecote] == 1)
+		   fita[cabecote] = 0;
+		   
+		estado = "A";
+	}
+	
+	console.log(fita);
+	console.log(estado);
+	console.log(cabecote);
+
+	if(fita[cabecote] != -1)
+	   turing(fita, estado, cabecote);
+	   
+	document.getElementById("body").innerHTML += text;
+}
+
+turing(fita, estado, cabecote);
+
+</script>
+<html>
